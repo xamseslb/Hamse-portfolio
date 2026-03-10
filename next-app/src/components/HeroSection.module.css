@@ -1,33 +1,33 @@
 /* ============================================
-   HeroSection — Single scroll flow
-   Container is 300vh. Sticky viewport holds
-   everything: hero text, cards, grid heading.
+   HeroSection — Austin Serb-matched layout
+   Cards are full-width (46% of viewport each),
+   matching Austin's edge-to-edge grid.
    ============================================ */
 
 .scrollContainer {
     position: relative;
-    height: 300vh;
+    height: 280vh;
 }
 
 .stickyViewport {
     position: sticky;
     top: 0;
     height: 100vh;
-    max-width: 1280px;
+    max-width: 1100px;
     margin: 0 auto;
-    padding: 100px 60px 60px;
+    padding: 80px 40px 40px;
     overflow: visible;
 }
 
-/* ---- Hero text (left side, fades out) ---- */
+/* ---- Hero text (left column, fades out) ---- */
 .heroText {
     position: absolute;
     top: 100px;
-    left: 60px;
+    left: 40px;
+    max-width: 420px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    max-width: 450px;
     z-index: 10;
 }
 
@@ -36,14 +36,14 @@
     align-items: center;
     gap: 8px;
     background: white;
-    border: 1px solid rgba(0, 0, 0, 0.07);
+    border: 1px solid rgba(0, 0, 0, 0.06);
     border-radius: 999px;
     padding: 6px 14px;
     font-size: 0.82rem;
     font-weight: 500;
     color: #0D0D1A;
-    margin-bottom: 28px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    margin-bottom: 24px;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
 }
 
 .dot {
@@ -51,28 +51,27 @@
     height: 7px;
     background: #22c55e;
     border-radius: 50%;
-    flex-shrink: 0;
 }
 
 .heroName {
-    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-size: clamp(2.5rem, 4.5vw, 4.2rem);
     font-weight: 900;
     letter-spacing: -0.04em;
     line-height: 1.0;
     color: #0D0D1A;
-    margin-bottom: 24px;
+    margin-bottom: 18px;
 }
 
 .dim {
-    color: rgba(13, 13, 26, 0.35);
+    color: rgba(13, 13, 26, 0.3);
 }
 
 .bio {
-    font-size: 0.97rem;
+    font-size: 0.88rem;
     color: #6B7280;
-    line-height: 1.7;
-    max-width: 420px;
-    margin-bottom: 36px;
+    line-height: 1.65;
+    max-width: 380px;
+    margin-bottom: 28px;
 }
 
 .githubBtn {
@@ -81,12 +80,12 @@
     gap: 10px;
     background: #0D0D1A;
     color: white;
-    padding: 11px 22px 11px 10px;
+    padding: 10px 20px 10px 8px;
     border-radius: 999px;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 600;
     transition: transform 0.2s, box-shadow 0.2s;
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
     text-decoration: none;
 }
 
@@ -96,62 +95,64 @@
 }
 
 .githubAvatar {
-    width: 34px;
-    height: 34px;
+    width: 32px;
+    height: 32px;
     background: linear-gradient(135deg, #4F46E5, #7C3AED);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 900;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: white;
-    flex-shrink: 0;
 }
 
-/* ---- "Latest Projects" heading (fades in mid-scroll) ---- */
+/* ---- "Latest Projects" heading ---- */
 .gridHeading {
     position: absolute;
-    top: 60px;
-    left: 60px;
+    top: 50px;
+    left: 40px;
     z-index: 5;
 }
 
 .latestTitle {
-    font-size: clamp(2rem, 5vw, 4rem);
+    font-size: clamp(2rem, 4vw, 3.2rem);
     font-weight: 900;
     letter-spacing: -0.04em;
     color: #0D0D1A;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 
 .latestSub {
-    font-size: 0.92rem;
+    font-size: 0.88rem;
     color: #6B7280;
-    line-height: 1.7;
 }
 
-/* ---- Project cards ---- */
+/* ---- Project cards ----
+   Start position: top-right of sticky viewport.
+   Width matches grid slot (~47% of container).
+   Cards are absolute so they can be transformed freely. */
 .card {
     position: absolute;
-    top: 15%;
-    right: 8%;
-    width: 340px;
+    top: 12%;
+    right: 3%;
+    width: 47%;
     aspect-ratio: 16 / 10;
-    border-radius: 18px;
+    border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.22);
     cursor: pointer;
     display: block;
     text-decoration: none;
     will-change: transform;
+    transition: box-shadow 0.3s;
 }
 
-.cardImageWrap {
-    position: absolute;
-    inset: 0;
+.card:hover {
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.32);
 }
 
+/* Card overlay (tag, title, CTA) */
 .cardOverlay {
     position: absolute;
     inset: 0;
@@ -166,21 +167,20 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(to bottom, transparent 35%, rgba(0, 0, 0, 0.65) 100%);
-    pointer-events: none;
+    background: linear-gradient(to bottom, transparent 30%, rgba(0, 0, 0, 0.6) 100%);
 }
 
 .cardTag {
     position: relative;
     z-index: 3;
     align-self: flex-start;
-    margin: 14px 14px 0;
+    margin: 12px 12px 0;
     background: rgba(255, 255, 255, 0.12);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.15);
     color: white;
-    font-size: 0.7rem;
+    font-size: 0.68rem;
     font-weight: 600;
     letter-spacing: 0.02em;
     padding: 4px 10px;
@@ -190,23 +190,23 @@
 .cardBottom {
     position: relative;
     z-index: 3;
-    padding: 14px 18px;
+    padding: 12px 16px;
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
 }
 
 .cardTitle {
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 700;
     color: white;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.01em;
 }
 
 .cardCta {
-    font-size: 0.72rem;
+    font-size: 0.68rem;
     font-weight: 600;
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(255, 255, 255, 0.65);
     white-space: nowrap;
 }
 
@@ -214,20 +214,16 @@
     color: white;
 }
 
-.card:hover {
-    box-shadow: 0 28px 72px rgba(0, 0, 0, 0.35);
-}
-
 /* ---- Placeholder card ---- */
 .placeholder {
     position: absolute;
-    top: 15%;
-    right: 8%;
-    width: 340px;
+    top: 12%;
+    right: 3%;
+    width: 47%;
     aspect-ratio: 16 / 10;
-    border-radius: 18px;
+    border-radius: 16px;
     background: #F8F7F4;
-    border: 2px dashed rgba(0, 0, 0, 0.12);
+    border: 2px dashed rgba(0, 0, 0, 0.1);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -241,11 +237,11 @@
 .placeholderIcon {
     font-size: 1.8rem;
     margin-bottom: 8px;
-    opacity: 0.3;
+    opacity: 0.25;
 }
 
 .placeholderLabel {
-    font-size: 0.78rem;
+    font-size: 0.75rem;
     font-weight: 600;
     color: #6B7280;
     letter-spacing: 0.05em;
@@ -255,7 +251,7 @@
 /* ---- View More Projects ---- */
 .viewMore {
     position: absolute;
-    bottom: 40px;
+    bottom: 30px;
     left: 0;
     right: 0;
     text-align: center;
@@ -263,26 +259,25 @@
 }
 
 .viewMore a {
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 600;
     color: #0D0D1A;
     text-decoration: none;
-    transition: color 0.2s;
 }
 
 .viewMore a:hover {
     color: #4F46E5;
 }
 
-/* ---- Scroll hint ---- */
+/* Scroll hint */
 .scrollHint {
     position: absolute;
-    bottom: 32px;
-    left: 60px;
+    bottom: 24px;
+    left: 40px;
     display: flex;
     align-items: center;
     gap: 6px;
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     font-weight: 500;
     color: #6B7280;
     z-index: 5;
@@ -296,7 +291,7 @@
 
     .stickyViewport {
         position: relative;
-        padding: 120px 28px 60px;
+        padding: 110px 20px 60px;
         text-align: center;
     }
 
@@ -322,7 +317,7 @@
     }
 
     .heroName {
-        font-size: 3rem;
+        font-size: 2.5rem;
     }
 
     .scrollHint {
@@ -332,6 +327,6 @@
     .viewMore {
         position: relative;
         bottom: auto;
-        margin-top: 30px;
+        margin-top: 20px;
     }
 }
