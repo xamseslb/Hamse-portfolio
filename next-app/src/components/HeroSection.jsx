@@ -9,21 +9,22 @@ const PROJECTS = [
     { id: 0, src: '/images/alphaframe.png', alt: 'AlphaFrame', tag: 'AI Trading System', title: 'AlphaFrame', cta: 'See Case Study ↗', href: '#' },
     { id: 1, src: '/images/afnanbakes.png', alt: 'AfnanBakes', tag: 'Full Stack Web App', title: 'AfnanBakes', cta: 'See Case Study ↗', href: '#' },
     { id: 2, src: '/images/bouncemaster.png', alt: 'Bounce Master', tag: 'Game Development', title: 'Bounce Master', cta: 'View on GitHub ↗', href: '#' },
+    { id: 3, src: '/images/placeholder_project.png', alt: 'Private Security', tag: 'Private Security', title: 'IAO', cta: 'View Case Study ↗', href: '#' },
 ];
 
 function ProjectCard({ project, progress, stackRotate, fromX, fromY, toX, toY, zIdx, stackOpacity }) {
-    const springCfg = { stiffness: 100, damping: 26, mass: 0.7 };
+    const springCfg = { stiffness: 90, damping: 24, mass: 0.8 };
 
-    const rawX = useTransform(progress, [0, 0.5], [fromX, toX]);
-    const rawY = useTransform(progress, [0, 0.5], [fromY, toY]);
-    const rawR = useTransform(progress, [0, 0.5], [stackRotate, 0]);
-    const rawOp = useTransform(progress, [0, 0.06], [stackOpacity, 1]);
+    const rawX = useTransform(progress, [0, 0.55], [fromX, toX]);
+    const rawY = useTransform(progress, [0, 0.55], [fromY, toY]);
+    const rawR = useTransform(progress, [0, 0.55], [stackRotate, 0]);
+    const rawOp = useTransform(progress, [0, 0.1], [stackOpacity, 1]);
 
     const x = useSpring(rawX, springCfg);
     const y = useSpring(rawY, springCfg);
     const rotate = useSpring(rawR, springCfg);
 
-    const infoOpacity = useTransform(progress, [0.35, 0.55], [0, 1]);
+    const infoOpacity = useTransform(progress, [0.4, 0.6], [0, 1]);
 
     return (
         <motion.a
@@ -35,7 +36,7 @@ function ProjectCard({ project, progress, stackRotate, fromX, fromY, toX, toY, z
                 src={project.src}
                 alt={project.alt}
                 fill
-                sizes="(max-width:900px) 100vw, 46vw"
+                sizes="(max-width:900px) 100vw, 40vw"
                 style={{ objectFit: 'cover' }}
                 priority
             />
@@ -58,29 +59,18 @@ export default function HeroSection() {
         offset: ['start start', 'end end'],
     });
 
-    const springCfg = { stiffness: 100, damping: 26, mass: 0.7 };
+    const springCfg = { stiffness: 90, damping: 24, mass: 0.8 };
 
-    const heroTextOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
-    const heroTextY = useSpring(useTransform(scrollYProgress, [0, 0.2], [0, -60]), springCfg);
+    const heroTextOpacity = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
+    const heroTextY = useSpring(useTransform(scrollYProgress, [0, 0.25], [0, -40]), springCfg);
 
-    const headingOpacity = useTransform(scrollYProgress, [0.3, 0.45], [0, 1]);
-    const headingY = useSpring(useTransform(scrollYProgress, [0.3, 0.45], [30, 0]), springCfg);
+    const headingOpacity = useTransform(scrollYProgress, [0.35, 0.5], [0, 1]);
+    const headingY = useSpring(useTransform(scrollYProgress, [0.35, 0.5], [20, 0]), springCfg);
 
-    const dividerOpacity = useTransform(scrollYProgress, [0.25, 0.4], [0, 1]);
+    const dividerOpacity = useTransform(scrollYProgress, [0.3, 0.45], [0, 1]);
 
-    const scrollHintOp = useTransform(scrollYProgress, [0, 0.06], [1, 0]);
-    const viewMoreOp = useTransform(scrollYProgress, [0.55, 0.65], [0, 1]);
-
-    /*
-      Grid positions: relative to card's starting CSS position (top-right).
-      Cards need to move LEFT to fill the 2-column grid and DOWN below heading.
-      
-      Using vw-approximate pixel values for a ~1280px viewport:
-      - Left column:  x ≈ -(containerWidth) + leftPadding
-      - Right column: x ≈ stays near start (slight adjust)
-      - Row 1 y: ~180px down from card start
-      - Row 2 y: ~460px down from card start
-    */
+    const scrollHintOp = useTransform(scrollYProgress, [0, 0.08], [1, 0]);
+    const viewMoreOp = useTransform(scrollYProgress, [0.6, 0.7], [0, 1]);
 
     return (
         <section ref={containerRef} className={styles.scrollContainer}>
@@ -91,18 +81,26 @@ export default function HeroSection() {
                     className={styles.heroText}
                     style={{ opacity: heroTextOpacity, y: heroTextY }}
                 >
+                    {/* 
+            User request: "Plassering av navn og portfolio – 'Austin Serb Portfolio' 
+            står under bylinje, skal være øverst som header"
+            So we place Hamse Portfolio AT THE TOP.
+          */}
+                    <h1 className={styles.heroName}>
+                        Hamse<br />
+                        Portfolio
+                    </h1>
+
                     <div className={styles.locationBadge}>
                         <span className={styles.dot} />
                         Oslo, Norway
                     </div>
-                    <h1 className={styles.heroName}>
-                        Hamse<br />
-                        <span className={styles.dim}>Portfolio</span>
-                    </h1>
+
                     <p className={styles.bio}>
                         <strong>Full-stack developer.</strong> React &amp; Next.js specialist.
                         AI systems builder. Student at <strong>OsloMet</strong>.
                     </p>
+
                     <a
                         href="https://github.com/xamseslb"
                         target="_blank"
@@ -126,19 +124,16 @@ export default function HeroSection() {
                     style={{ opacity: headingOpacity, y: headingY }}
                 >
                     <h2 className={styles.latestTitle}>Latest Projects</h2>
-                    <p className={styles.latestSub}>
-                        A collection of what I&apos;ve actually built — from AI trading systems to full-stack web apps.
-                    </p>
                 </motion.div>
 
                 {/* Card 0: AlphaFrame → grid top-left */}
                 <ProjectCard
                     project={PROJECTS[0]}
                     progress={scrollYProgress}
-                    stackRotate={-5}
+                    stackRotate={-4}
                     fromX={0} fromY={0}
-                    toX={-480} toY={200}
-                    zIdx={3}
+                    toX={-500} toY={200}
+                    zIdx={4}
                     stackOpacity={1}
                 />
 
@@ -146,39 +141,34 @@ export default function HeroSection() {
                 <ProjectCard
                     project={PROJECTS[1]}
                     progress={scrollYProgress}
-                    stackRotate={3}
+                    stackRotate={2}
                     fromX={0} fromY={0}
-                    toX={12} toY={200}
-                    zIdx={2}
-                    stackOpacity={0.85}
+                    toX={20} toY={200}
+                    zIdx={3}
+                    stackOpacity={0.9}
                 />
 
                 {/* Card 2: BounceM → grid bottom-left */}
                 <ProjectCard
                     project={PROJECTS[2]}
                     progress={scrollYProgress}
-                    stackRotate={8}
+                    stackRotate={6}
                     fromX={0} fromY={0}
-                    toX={-480} toY={480}
-                    zIdx={1}
-                    stackOpacity={0.65}
+                    toX={-500} toY={480}
+                    zIdx={2}
+                    stackOpacity={0.7}
                 />
 
-                {/* Placeholder → grid bottom-right */}
-                <motion.div
-                    className={styles.placeholder}
-                    style={{
-                        opacity: useTransform(scrollYProgress, [0.35, 0.5], [0, 1]),
-                        x: useSpring(useTransform(scrollYProgress, [0.3, 0.5], [100, 12]), springCfg),
-                        y: useSpring(useTransform(scrollYProgress, [0.3, 0.5], [200, 480]), springCfg),
-                        scale: useSpring(useTransform(scrollYProgress, [0.3, 0.5], [0.5, 1]), springCfg),
-                    }}
-                >
-                    <div className={styles.placeholderInner}>
-                        <div className={styles.placeholderIcon}>🚧</div>
-                        <p className={styles.placeholderLabel}>Coming Soon</p>
-                    </div>
-                </motion.div>
+                {/* Card 3: Placeholder (IAO equivalent) → grid bottom-right */}
+                <ProjectCard
+                    project={PROJECTS[3]}
+                    progress={scrollYProgress}
+                    stackRotate={-2}
+                    fromX={0} fromY={0}
+                    toX={20} toY={480}
+                    zIdx={1}
+                    stackOpacity={0.5}
+                />
 
                 {/* View More Projects */}
                 <motion.div

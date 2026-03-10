@@ -2,19 +2,16 @@ import Nav from '@/components/Nav';
 import HeroSection from '@/components/HeroSection';
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
-import styles from './page.module.css';
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <div className={styles.container}>
-        <Nav />
-        <main>
-          <HeroSection />
-          <ContactSection />
-        </main>
-        <Footer />
-      </div>
+    <div style={{ position: 'relative', zIndex: 1, minHeight: '100vh' }}>
+      <Nav />
+      <main>
+        <HeroSection />
+        <ContactSection />
+      </main>
+      <Footer />
     </div>
   );
 }

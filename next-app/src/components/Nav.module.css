@@ -1,6 +1,11 @@
+/* ============================================
+   Nav — Austin layout
+   (Pill with icon on the left, links on the right)
+   ============================================ */
+
 .nav {
     position: fixed;
-    top: 20px;
+    top: 24px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 100;
@@ -14,51 +19,48 @@
     pointer-events: all;
     display: flex;
     align-items: center;
-    gap: 8px;
-    background: rgba(255, 255, 255, 0.85);
+    gap: 32px;
+    background: rgba(255, 255, 255, 0.95);
     -webkit-backdrop-filter: blur(16px);
     backdrop-filter: blur(16px);
-    border: 1px solid rgba(0, 0, 0, 0.07);
+    border: 1px solid rgba(0, 0, 0, 0.06);
     border-radius: 999px;
-    padding: 8px 8px 8px 14px;
-    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+    padding: 6px 6px 6px 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
 .logo {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 12px;
     font-weight: 700;
-    font-size: 0.92rem;
+    font-size: 0.95rem;
     letter-spacing: -0.02em;
     color: #0D0D1A;
-    margin-right: 8px;
 }
 
 .icon {
-    width: 26px;
-    height: 26px;
+    width: 24px;
+    height: 24px;
     background: #0D0D1A;
-    border-radius: 7px;
+    border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
-    font-size: 0.75rem;
-    font-weight: 900;
 }
 
 .links {
     display: flex;
     align-items: center;
-    gap: 2px;
+    gap: 12px;
 }
 
 .link {
-    font-size: 0.82rem;
-    font-weight: 500;
+    font-size: 0.85rem;
+    font-weight: 600;
     color: #6B7280;
-    padding: 6px 14px;
+    padding: 8px 16px;
     border-radius: 999px;
     transition: background 0.2s, color 0.2s;
 }
@@ -68,14 +70,13 @@
     color: #0D0D1A;
 }
 
-/* Contact — outlined pill like Austin */
 .linkOutlined {
-    font-size: 0.82rem;
-    font-weight: 500;
+    font-size: 0.85rem;
+    font-weight: 600;
     color: #0D0D1A;
-    padding: 6px 16px;
+    padding: 8px 24px;
     border-radius: 999px;
-    border: 1px solid rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(0, 0, 0, 0.1);
     transition: background 0.2s, color 0.2s;
 }
 

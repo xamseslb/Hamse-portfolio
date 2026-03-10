@@ -1,7 +1,5 @@
 /* ============================================
-   HeroSection — Full-width Austin layout
-   Uses percentage-based widths to fill the
-   container edge-to-edge.
+   HeroSection — Austin Serb identical layout
    ============================================ */
 
 .scrollContainer {
@@ -14,20 +12,33 @@
     top: 0;
     height: 100vh;
     width: 100%;
-    padding: 90px 60px 40px;
+    padding: 12vh 8vw;
     overflow: visible;
 }
 
 /* ---- Hero text (left side) ---- */
 .heroText {
     position: absolute;
-    top: 110px;
-    left: 60px;
+    top: 14vh;
+    left: 8vw;
     max-width: 440px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     z-index: 10;
+}
+
+.heroName {
+    font-size: clamp(3.5rem, 6vw, 5.2rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+    color: #0D0D1A;
+    margin-bottom: 24px;
+}
+
+.dim {
+    color: rgba(13, 13, 26, 0.3);
 }
 
 .locationBadge {
@@ -37,40 +48,28 @@
     background: white;
     border: 1px solid rgba(0, 0, 0, 0.06);
     border-radius: 999px;
-    padding: 7px 16px;
-    font-size: 0.82rem;
-    font-weight: 500;
+    padding: 6px 14px;
+    font-size: 0.8rem;
+    font-weight: 600;
     color: #0D0D1A;
-    margin-bottom: 32px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+    margin-bottom: 20px;
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.04);
 }
 
 .dot {
-    width: 8px;
-    height: 8px;
+    width: 7px;
+    height: 7px;
     background: #22c55e;
     border-radius: 50%;
 }
 
-.heroName {
-    font-size: clamp(2.8rem, 5vw, 4.5rem);
-    font-weight: 900;
-    letter-spacing: -0.04em;
-    line-height: 1.02;
-    color: #0D0D1A;
-    margin-bottom: 24px;
-}
-
-.dim {
-    color: rgba(13, 13, 26, 0.28);
-}
-
 .bio {
-    font-size: 0.92rem;
-    color: #6B7280;
-    line-height: 1.7;
+    font-size: 0.95rem;
+    color: #4B5563;
+    line-height: 1.6;
     max-width: 380px;
-    margin-bottom: 36px;
+    margin-top: 24px;
+    margin-bottom: 24px;
 }
 
 .githubBtn {
@@ -79,66 +78,69 @@
     gap: 10px;
     background: #0D0D1A;
     color: white;
-    padding: 10px 22px 10px 8px;
+    padding: 8px 18px 8px 6px;
     border-radius: 999px;
-    font-size: 0.88rem;
+    font-size: 0.85rem;
     font-weight: 600;
     transition: transform 0.2s, box-shadow 0.2s;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
     text-decoration: none;
 }
 
 .githubBtn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
 }
 
 .githubAvatar {
-    width: 32px;
-    height: 32px;
-    background: linear-gradient(135deg, #4F46E5, #7C3AED);
+    width: 30px;
+    height: 30px;
+    background: linear-gradient(135deg, #111827, #374151);
+    /* darker, sleek gradient */
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 900;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     color: white;
 }
 
 /* ---- "Latest Projects" heading ---- */
 .gridHeading {
     position: absolute;
-    top: 60px;
-    left: 60px;
+    top: 10vh;
+    left: 8vw;
     z-index: 5;
 }
 
 .latestTitle {
-    font-size: clamp(2.2rem, 4.5vw, 3.4rem);
-    font-weight: 900;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
     letter-spacing: -0.04em;
     color: #0D0D1A;
     margin-bottom: 8px;
 }
 
 .latestSub {
-    font-size: 0.88rem;
+    /* Austin doesn't use sub here, but leaving for content */
+    font-size: 0.9rem;
     color: #6B7280;
+    display: none;
+    /* Hide subtitle to match Austin perfectly */
 }
 
-/* ---- Project cards ----
-   Width = ~46% of the viewport for 2-col grid.
-   Start position is top-right of sticky viewport. */
+/* ---- Project cards ---- */
 .card {
     position: absolute;
-    top: 14%;
-    right: 4%;
-    width: 44%;
+    top: 15vh;
+    right: 5vw;
+    width: 42vw;
+    max-width: 600px;
     aspect-ratio: 16 / 10;
     border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
     cursor: pointer;
     display: block;
     text-decoration: none;
@@ -147,10 +149,9 @@
 }
 
 .card:hover {
-    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
 }
 
-/* Card overlay (tag, title, CTA) */
 .cardOverlay {
     position: absolute;
     inset: 0;
@@ -165,45 +166,45 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(to bottom, transparent 30%, rgba(0, 0, 0, 0.55) 100%);
+    background: linear-gradient(to bottom, transparent 40%, rgba(0, 0, 0, 0.6) 100%);
 }
 
 .cardTag {
     position: relative;
     z-index: 3;
     align-self: flex-start;
-    margin: 14px 14px 0;
-    background: rgba(0, 0, 0, 0.5);
-    -webkit-backdrop-filter: blur(12px);
+    margin: 16px 16px 0;
+    background: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     color: white;
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     font-weight: 600;
-    letter-spacing: 0.02em;
-    padding: 5px 12px;
+    letter-spacing: 0.03em;
+    padding: 6px 14px;
     border-radius: 999px;
 }
 
 .cardBottom {
     position: relative;
     z-index: 3;
-    padding: 16px 20px;
+    padding: 20px 24px;
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
 }
 
 .cardTitle {
-    font-size: 1.05rem;
+    font-size: 1.15rem;
     font-weight: 700;
     color: white;
     letter-spacing: -0.01em;
 }
 
 .cardCta {
-    font-size: 0.72rem;
+    font-size: 0.75rem;
     font-weight: 600;
-    color: rgba(255, 255, 255, 0.65);
+    color: rgba(255, 255, 255, 0.7);
     white-space: nowrap;
 }
 
@@ -211,44 +212,10 @@
     color: white;
 }
 
-/* ---- Placeholder card ---- */
-.placeholder {
-    position: absolute;
-    top: 14%;
-    right: 4%;
-    width: 44%;
-    aspect-ratio: 16 / 10;
-    border-radius: 16px;
-    background: rgba(0, 0, 0, 0.03);
-    border: 2px dashed rgba(0, 0, 0, 0.08);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    will-change: transform;
-}
-
-.placeholderInner {
-    text-align: center;
-}
-
-.placeholderIcon {
-    font-size: 1.8rem;
-    margin-bottom: 8px;
-    opacity: 0.2;
-}
-
-.placeholderLabel {
-    font-size: 0.72rem;
-    font-weight: 600;
-    color: #9CA3AF;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-}
-
 /* ---- View More Projects ---- */
 .viewMore {
     position: absolute;
-    bottom: 28px;
+    bottom: 5vh;
     left: 0;
     right: 0;
     text-align: center;
@@ -268,26 +235,19 @@
 
 /* Scroll hint */
 .scrollHint {
-    position: absolute;
-    bottom: 28px;
-    left: 60px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 0.72rem;
-    font-weight: 500;
-    color: #9CA3AF;
-    z-index: 5;
+    display: none;
+    /* removed to match Austin's ultra clean look */
 }
 
-/* Section divider line between hero and grid */
+/* Section divider line */
 .divider {
     position: absolute;
-    top: 130px;
-    left: 60px;
-    right: 60px;
+    top: 22vh;
+    /* below latest projects */
+    left: 8vw;
+    right: 8vw;
     height: 1px;
-    background: rgba(0, 0, 0, 0.08);
+    background: rgba(0, 0, 0, 0.06);
     z-index: 4;
 }
 
@@ -299,7 +259,7 @@
 
     .stickyViewport {
         position: relative;
-        padding: 110px 24px 60px;
+        padding: 120px 24px 60px;
         text-align: center;
     }
 
@@ -311,8 +271,7 @@
         max-width: none;
     }
 
-    .card,
-    .placeholder {
+    .card {
         display: none;
     }
 
@@ -326,10 +285,6 @@
 
     .heroName {
         font-size: 2.5rem;
-    }
-
-    .scrollHint {
-        display: none;
     }
 
     .viewMore {
