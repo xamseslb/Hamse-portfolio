@@ -1,6 +1,5 @@
 /* ============================================
-   HeroSection — Austin Serb identical layout
-   Now constrained within the .container box
+   HeroSection — Parallax Scrolling Layout
    ============================================ */
 
 .scrollContainer {
@@ -8,26 +7,25 @@
     height: 280vh;
 }
 
-.stickyViewport {
-    position: sticky;
-    top: 0;
-    height: calc(100vh - 48px);
-    /* Account for container margin/padding */
-    width: 100%;
-    padding: 12vh 6%;
-    overflow: visible;
-}
-
-/* ---- Hero text (left side) ---- */
-.heroText {
+/* ---- Layer 1: Normal Flow Content ---- */
+.normalFlowContent {
     position: absolute;
+    /* or relative padding */
     top: 14vh;
     left: 6%;
+    width: 88%;
+    z-index: 5;
+    pointer-events: none;
+    /* let clicks pass down if needed */
+}
+
+.heroText {
     max-width: 440px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    z-index: 10;
+    pointer-events: auto;
+    /* re-enable clicks for links */
 }
 
 .heroName {
@@ -98,7 +96,6 @@
     width: 30px;
     height: 30px;
     background: linear-gradient(135deg, #111827, #374151);
-    /* darker, sleek gradient */
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -108,12 +105,49 @@
     color: white;
 }
 
-/* ---- "Latest Projects" heading ---- */
+.scrollHintRaw {
+    margin-top: 10vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #6B7280;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    opacity: 0.6;
+}
+
+/* ---- Layer 2: Sticky Cards Viewport ---- */
+.stickyCardsViewport {
+    position: sticky;
+    top: 0;
+    height: calc(100vh - 48px);
+    /* Height of the container constraint */
+    width: 100%;
+    pointer-events: none;
+    /* So it doesn't block the text underneath before scrolling */
+    z-index: 10;
+    overflow: visible;
+}
+
+/* The divider line */
+.divider {
+    position: absolute;
+    top: 22vh;
+    left: 6%;
+    right: 6%;
+    height: 1px;
+    background: rgba(0, 0, 0, 0.06);
+}
+
+/* "Latest Projects" heading */
 .gridHeading {
     position: absolute;
     top: 10vh;
     left: 6%;
-    z-index: 5;
+    pointer-events: auto;
 }
 
 .latestTitle {
@@ -124,13 +158,13 @@
     margin-bottom: 8px;
 }
 
-.latestSub {
-    font-size: 0.9rem;
-    color: #6B7280;
-    display: none;
+/* ---- Project cards ---- */
+.cardsWrapper {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
 }
 
-/* ---- Project cards ---- */
 .card {
     position: absolute;
     top: 15vh;
@@ -143,18 +177,19 @@
     cursor: pointer;
     display: block;
     text-decoration: none;
+    pointer-events: auto;
+    /* Re-enable clicks for the cards themselves */
 
-    /* HARDWARE ACCELERATION to prevent scroll lag */
+    /* Hardware Acceleration */
     will-change: transform;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     transform: translateZ(0);
-
     transition: box-shadow 0.3s;
 }
 
 .card:hover {
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.3);
 }
 
 .cardOverlay {
@@ -224,7 +259,7 @@
     left: 0;
     right: 0;
     text-align: center;
-    z-index: 5;
+    pointer-events: auto;
 }
 
 .viewMore a {
@@ -238,34 +273,30 @@
     color: #4F46E5;
 }
 
-/* Section divider line */
-.divider {
-    position: absolute;
-    top: 22vh;
-    /* below latest projects */
-    left: 6%;
-    right: 6%;
-    height: 1px;
-    background: rgba(0, 0, 0, 0.06);
-    z-index: 4;
-}
-
 /* ---- Responsive ---- */
 @media (max-width: 900px) {
     .scrollContainer {
         height: auto;
     }
 
-    .stickyViewport {
+    .stickyCardsViewport {
         position: relative;
+        height: auto;
         padding: 120px 24px 60px;
         text-align: center;
     }
 
-    .heroText {
+    .normalFlowContent {
         position: relative;
         top: auto;
         left: auto;
+        padding-top: 100px;
+        width: 100%;
+        text-align: center;
+        align-items: center;
+    }
+
+    .heroText {
         align-items: center;
         max-width: none;
     }

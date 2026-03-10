@@ -13,8 +13,6 @@ const PROJECTS = [
 ];
 
 function ProjectCard({ project, progress, stackRotate, fromX, fromY, toX, toY, zIdx, stackOpacity }) {
-    // Use the pre-smoothed progress value to calculate transforms. 
-    // No individual springs needed here, drastically improving performance.
     const x = useTransform(progress, [0, 0.55], [fromX, toX]);
     const y = useTransform(progress, [0, 0.55], [fromY, toY]);
     const rotate = useTransform(progress, [0, 0.55], [stackRotate, 0]);
@@ -54,31 +52,30 @@ export default function HeroSection() {
         offset: ['start start', 'end end'],
     });
 
-    // CRITICAL PERFORMANCE FIX: 
-    // Map animations directly to raw scroll progress instead of a physics spring.
-    // This removes the "floaty/lagging" feeling and links movement 1:1 with the mouse wheel.
-    const smoothProgress = scrollYProgress;
+    // A very light, single spring physics wrapper to give Austin's "free" feeling without the heavy stutter
+    const smoothProgress = useSpring(scrollYProgress, {
+        stiffness: 120,
+        damping: 24,
+        restDelta: 0.001
+    });
 
-    const heroTextOpacity = useTransform(smoothProgress, [0, 0.25], [1, 0]);
-    const heroTextY = useTransform(smoothProgress, [0, 0.25], [0, -40]);
+    const headingOpacity = useTransform(smoothProgress, [0.2, 0.35], [0, 1]);
+    const headingY = useTransform(smoothProgress, [0.2, 0.35], [20, 0]);
 
-    const headingOpacity = useTransform(smoothProgress, [0.35, 0.5], [0, 1]);
-    const headingY = useTransform(smoothProgress, [0.35, 0.5], [20, 0]);
-
-    const dividerOpacity = useTransform(smoothProgress, [0.3, 0.45], [0, 1]);
-
+    const dividerOpacity = useTransform(smoothProgress, [0.15, 0.3], [0, 1]);
     const scrollHintOp = useTransform(smoothProgress, [0, 0.08], [1, 0]);
-    const viewMoreOp = useTransform(smoothProgress, [0.6, 0.7], [0, 1]);
+    const viewMoreOp = useTransform(smoothProgress, [0.65, 0.75], [0, 1]);
 
     return (
         <section ref={containerRef} className={styles.scrollContainer}>
-            <div className={styles.stickyViewport}>
 
-                {/* Hero text */}
-                <motion.div
-                    className={styles.heroText}
-                    style={{ opacity: heroTextOpacity, y: heroTextY }}
-                >
+            {/* 
+        LAYER 1: Normal document flow. 
+        This is why it felt rigid before - the hero text couldn't scroll away naturally. 
+        Now it will scroll up as the user moves down, exposing the background gracefully.
+      */}
+            <div className={styles.normalFlowContent}>
+                <div className={styles.heroText}>
                     <h1 className={styles.heroName}>
                         Hamse<br />
                         Portfolio
@@ -103,80 +100,80 @@ export default function HeroSection() {
                         <span className={styles.githubAvatar}>H</span>
                         See My GitHub
                     </a>
-                </motion.div>
+                </div>
 
-                {/* Divider line */}
+                {/* Scroll hint naturally situated in the document flow */}
                 <motion.div
-                    className={styles.divider}
-                    style={{ opacity: dividerOpacity }}
-                />
-
-                {/* "Latest Projects" heading */}
-                <motion.div
-                    className={styles.gridHeading}
-                    style={{ opacity: headingOpacity, y: headingY }}
-                >
-                    <h2 className={styles.latestTitle}>Latest Projects</h2>
-                </motion.div>
-
-                {/* Cards using smoothProgress instead of raw scrollYProgress */}
-                <ProjectCard
-                    project={PROJECTS[0]}
-                    progress={smoothProgress}
-                    stackRotate={-4}
-                    fromX={0} fromY={0}
-                    toX={-500} toY={200}
-                    zIdx={4}
-                    stackOpacity={1}
-                />
-
-                <ProjectCard
-                    project={PROJECTS[1]}
-                    progress={smoothProgress}
-                    stackRotate={2}
-                    fromX={0} fromY={0}
-                    toX={20} toY={200}
-                    zIdx={3}
-                    stackOpacity={0.9}
-                />
-
-                <ProjectCard
-                    project={PROJECTS[2]}
-                    progress={smoothProgress}
-                    stackRotate={6}
-                    fromX={0} fromY={0}
-                    toX={-500} toY={480}
-                    zIdx={2}
-                    stackOpacity={0.7}
-                />
-
-                <ProjectCard
-                    project={PROJECTS[3]}
-                    progress={smoothProgress}
-                    stackRotate={-2}
-                    fromX={0} fromY={0}
-                    toX={20} toY={480}
-                    zIdx={1}
-                    stackOpacity={0.5}
-                />
-
-                {/* View More Projects */}
-                <motion.div
-                    className={styles.viewMore}
-                    style={{ opacity: viewMoreOp }}
-                >
-                    <a href="/projects">View More Projects ↗</a>
-                </motion.div>
-
-                {/* Scroll hint */}
-                <motion.div
-                    className={styles.scrollHint}
+                    className={styles.scrollHintRaw}
                     style={{ opacity: scrollHintOp }}
                 >
                     <span>Scroll</span>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                         <path d="M12 5v14M5 12l7 7 7-7" />
                     </svg>
+                </motion.div>
+            </div>
+
+            {/* 
+        LAYER 2: The sticky cards.
+        They stay frozen on the screen while the heroText scrolls up behind them.
+      */}
+            <div className={styles.stickyCardsViewport}>
+
+                {/* Divider line that appears over time */}
+                <motion.div className={styles.divider} style={{ opacity: dividerOpacity }} />
+
+                {/* "Latest Projects" heading fades in */}
+                <motion.div className={styles.gridHeading} style={{ opacity: headingOpacity, y: headingY }}>
+                    <h2 className={styles.latestTitle}>Latest Projects</h2>
+                </motion.div>
+
+                {/* Project Cards */}
+                <div className={styles.cardsWrapper}>
+                    <ProjectCard
+                        project={PROJECTS[0]}
+                        progress={smoothProgress}
+                        stackRotate={-4}
+                        fromX={0} fromY={0}
+                        toX={-500} toY={200}
+                        zIdx={4}
+                        stackOpacity={1}
+                    />
+
+                    <ProjectCard
+                        project={PROJECTS[1]}
+                        progress={smoothProgress}
+                        stackRotate={2}
+                        fromX={0} fromY={0}
+                        toX={20} toY={200}
+                        zIdx={3}
+                        stackOpacity={0.9}
+                    />
+
+                    <ProjectCard
+                        project={PROJECTS[2]}
+                        progress={smoothProgress}
+                        stackRotate={6}
+                        fromX={0} fromY={0}
+                        toX={-500} toY={480}
+                        zIdx={2}
+                        stackOpacity={0.7}
+                    />
+
+                    <ProjectCard
+                        project={PROJECTS[3]}
+                        progress={smoothProgress}
+                        stackRotate={-2}
+                        fromX={0} fromY={0}
+                        toX={20} toY={480}
+                        zIdx={1}
+                        stackOpacity={0.5}
+                    />
+                </div>
+
+                {/* View More Projects fading in at the end */}
+                <motion.div className={styles.viewMore} style={{ opacity: viewMoreOp }}>
+                    <a href="/projects">View More Projects ↗</a>
                 </motion.div>
 
             </div>
