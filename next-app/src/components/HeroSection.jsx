@@ -55,13 +55,9 @@ export default function HeroSection() {
     });
 
     // CRITICAL PERFORMANCE FIX: 
-    // Apply physics spring to the master scroll value ONCE.
-    // All other transforms will mathematically derive from this smoothed value.
-    const smoothProgress = useSpring(scrollYProgress, {
-        stiffness: 100,
-        damping: 30,
-        restDelta: 0.001
-    });
+    // Map animations directly to raw scroll progress instead of a physics spring.
+    // This removes the "floaty/lagging" feeling and links movement 1:1 with the mouse wheel.
+    const smoothProgress = scrollYProgress;
 
     const heroTextOpacity = useTransform(smoothProgress, [0, 0.25], [1, 0]);
     const heroTextY = useTransform(smoothProgress, [0, 0.25], [0, -40]);

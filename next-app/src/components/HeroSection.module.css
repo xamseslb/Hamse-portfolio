@@ -143,7 +143,13 @@
     cursor: pointer;
     display: block;
     text-decoration: none;
+
+    /* HARDWARE ACCELERATION to prevent scroll lag */
     will-change: transform;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+
     transition: box-shadow 0.3s;
 }
 
@@ -174,8 +180,8 @@
     align-self: flex-start;
     margin: 16px 16px 0;
     background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
     color: white;
     font-size: 0.65rem;
     font-weight: 600;
