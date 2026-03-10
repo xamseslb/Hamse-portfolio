@@ -207,28 +207,104 @@ body::before {
 }
 
 /* ============================================
-   HERO PIN – scroll-driven animation
-   The outer .hero-pin is 220vh tall.
-   The inner .hero-sticky stays fixed at the top
-   while you scroll. JS reads scroll progress
-   and applies transforms to .mock images.
+   HERO PIN – GSAP handles the pinning
    ============================================ */
 .hero-pin {
-  position: relative;
-  height: 220vh;
-}
-
-.hero-sticky {
-  position: sticky;
-  top: 0;
-  height: 100vh;
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
+  min-height: 100vh;
   max-width: 1280px;
   margin: 0 auto;
   padding: 100px 60px 60px;
   gap: 40px;
+  position: relative;
+}
+
+/* LEFT: text column */
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* RIGHT: hero card stack */
+.hero-cards-area {
+  position: relative;
+  height: 440px;
+}
+
+/* Each card wrapper — initial stacked positions */
+.hero-card-wrap {
+  position: absolute;
+  width: 84%;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.28);
+}
+
+.hero-card-wrap img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* hcard individual stacked positions */
+.hcard-0 {
+  display: block;
+}
+
+.hcard-1 {
+  display: block;
+}
+
+.hcard-2 {
+  display: block;
+}
+
+#wrap-0 {
+  top: 0%;
+  right: 16%;
+  transform: rotate(-4deg);
+  z-index: 3;
+}
+
+#wrap-1 {
+  top: 4%;
+  right: 8%;
+  transform: rotate(2deg);
+  z-index: 2;
+  opacity: 0.82;
+}
+
+#wrap-2 {
+  top: 10%;
+  right: 0;
+  transform: rotate(7deg);
+  z-index: 1;
+  opacity: 0.65;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .hero-pin {
+    grid-template-columns: 1fr;
+    padding: 120px 28px 60px;
+    text-align: center;
+  }
+
+  .hero-text {
+    align-items: center;
+  }
+
+  .hero-cards-area {
+    display: none;
+  }
+
+  .hero-name {
+    font-size: 3rem;
+  }
 }
 
 /* LEFT COLUMN */
