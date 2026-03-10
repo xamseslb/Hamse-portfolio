@@ -13,24 +13,19 @@ const PROJECTS = [
 ];
 
 function ProjectCard({ project, progress, stackRotate, fromX, fromY, toX, toY, zIdx, stackOpacity }) {
-    const springCfg = { stiffness: 90, damping: 24, mass: 0.8 };
-
-    const rawX = useTransform(progress, [0, 0.55], [fromX, toX]);
-    const rawY = useTransform(progress, [0, 0.55], [fromY, toY]);
-    const rawR = useTransform(progress, [0, 0.55], [stackRotate, 0]);
-    const rawOp = useTransform(progress, [0, 0.1], [stackOpacity, 1]);
-
-    const x = useSpring(rawX, springCfg);
-    const y = useSpring(rawY, springCfg);
-    const rotate = useSpring(rawR, springCfg);
-
+    // Use the pre-smoothed progress value to calculate transforms. 
+    // No individual springs needed here, drastically improving performance.
+    const x = useTransform(progress, [0, 0.55], [fromX, toX]);
+    const y = useTransform(progress, [0, 0.55], [fromY, toY]);
+    const rotate = useTransform(progress, [0, 0.55], [stackRotate, 0]);
+    const opacity = useTransform(progress, [0, 0.1], [stackOpacity, 1]);
     const infoOpacity = useTransform(progress, [0.4, 0.6], [0, 1]);
 
     return (
         <motion.a
             href={project.href}
             className={styles.card}
-            style={{ x, y, rotate, opacity: rawOp, zIndex: zIdx }}
+            style={{ x, y, rotate, opacity, zIndex: zIdx }}
         >
             <Image
                 src={project.src}
@@ -59,18 +54,25 @@ export default function HeroSection() {
         offset: ['start start', 'end end'],
     });
 
-    const springCfg = { stiffness: 90, damping: 24, mass: 0.8 };
+    // CRITICAL PERFORMANCE FIX: 
+    // Apply physics spring to the master scroll value ONCE.
+    // All other transforms will mathematically derive from this smoothed value.
+    const smoothProgress = useSpring(scrollYProgress, {
+        stiffness: 100,
+        damping: 30,
+        restDelta: 0.001
+    });
 
-    const heroTextOpacity = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
-    const heroTextY = useSpring(useTransform(scrollYProgress, [0, 0.25], [0, -40]), springCfg);
+    const heroTextOpacity = useTransform(smoothProgress, [0, 0.25], [1, 0]);
+    const heroTextY = useTransform(smoothProgress, [0, 0.25], [0, -40]);
 
-    const headingOpacity = useTransform(scrollYProgress, [0.35, 0.5], [0, 1]);
-    const headingY = useSpring(useTransform(scrollYProgress, [0.35, 0.5], [20, 0]), springCfg);
+    const headingOpacity = useTransform(smoothProgress, [0.35, 0.5], [0, 1]);
+    const headingY = useTransform(smoothProgress, [0.35, 0.5], [20, 0]);
 
-    const dividerOpacity = useTransform(scrollYProgress, [0.3, 0.45], [0, 1]);
+    const dividerOpacity = useTransform(smoothProgress, [0.3, 0.45], [0, 1]);
 
-    const scrollHintOp = useTransform(scrollYProgress, [0, 0.08], [1, 0]);
-    const viewMoreOp = useTransform(scrollYProgress, [0.6, 0.7], [0, 1]);
+    const scrollHintOp = useTransform(smoothProgress, [0, 0.08], [1, 0]);
+    const viewMoreOp = useTransform(smoothProgress, [0.6, 0.7], [0, 1]);
 
     return (
         <section ref={containerRef} className={styles.scrollContainer}>
@@ -81,11 +83,6 @@ export default function HeroSection() {
                     className={styles.heroText}
                     style={{ opacity: heroTextOpacity, y: heroTextY }}
                 >
-                    {/* 
-            User request: "Plassering av navn og portfolio – 'Austin Serb Portfolio' 
-            står under bylinje, skal være øverst som header"
-            So we place Hamse Portfolio AT THE TOP.
-          */}
                     <h1 className={styles.heroName}>
                         Hamse<br />
                         Portfolio
@@ -112,7 +109,7 @@ export default function HeroSection() {
                     </a>
                 </motion.div>
 
-                {/* Divider line (appears between hero and grid) */}
+                {/* Divider line */}
                 <motion.div
                     className={styles.divider}
                     style={{ opacity: dividerOpacity }}
@@ -126,10 +123,10 @@ export default function HeroSection() {
                     <h2 className={styles.latestTitle}>Latest Projects</h2>
                 </motion.div>
 
-                {/* Card 0: AlphaFrame → grid top-left */}
+                {/* Cards using smoothProgress instead of raw scrollYProgress */}
                 <ProjectCard
                     project={PROJECTS[0]}
-                    progress={scrollYProgress}
+                    progress={smoothProgress}
                     stackRotate={-4}
                     fromX={0} fromY={0}
                     toX={-500} toY={200}
@@ -137,10 +134,9 @@ export default function HeroSection() {
                     stackOpacity={1}
                 />
 
-                {/* Card 1: AfnanBakes → grid top-right */}
                 <ProjectCard
                     project={PROJECTS[1]}
-                    progress={scrollYProgress}
+                    progress={smoothProgress}
                     stackRotate={2}
                     fromX={0} fromY={0}
                     toX={20} toY={200}
@@ -148,10 +144,9 @@ export default function HeroSection() {
                     stackOpacity={0.9}
                 />
 
-                {/* Card 2: BounceM → grid bottom-left */}
                 <ProjectCard
                     project={PROJECTS[2]}
-                    progress={scrollYProgress}
+                    progress={smoothProgress}
                     stackRotate={6}
                     fromX={0} fromY={0}
                     toX={-500} toY={480}
@@ -159,10 +154,9 @@ export default function HeroSection() {
                     stackOpacity={0.7}
                 />
 
-                {/* Card 3: Placeholder (IAO equivalent) → grid bottom-right */}
                 <ProjectCard
                     project={PROJECTS[3]}
-                    progress={scrollYProgress}
+                    progress={smoothProgress}
                     stackRotate={-2}
                     fromX={0} fromY={0}
                     toX={20} toY={480}
