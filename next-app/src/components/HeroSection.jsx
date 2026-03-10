@@ -13,11 +13,11 @@ const PROJECTS = [
 ];
 
 function ProjectCard({ project, progress, stackRotate, fromX, fromY, toX, toY, zIdx, stackOpacity }) {
-    const x = useTransform(progress, [0, 0.55], [fromX, toX]);
-    const y = useTransform(progress, [0, 0.55], [fromY, toY]);
-    const rotate = useTransform(progress, [0, 0.55], [stackRotate, 0]);
-    const opacity = useTransform(progress, [0, 0.1], [stackOpacity, 1]);
-    const infoOpacity = useTransform(progress, [0.4, 0.6], [0, 1]);
+    const x = useTransform(progress, [0, 1], [fromX, toX]);
+    const y = useTransform(progress, [0, 1], [fromY, toY]);
+    const rotate = useTransform(progress, [0, 1], [stackRotate, 0]);
+    const opacity = useTransform(progress, [0, 0.2], [stackOpacity, 1]);
+    const infoOpacity = useTransform(progress, [0.4, 0.9], [0, 1]);
 
     return (
         <motion.a
