@@ -7,12 +7,14 @@ import styles from './page.module.css';
 export default function Home() {
   return (
     <div className={styles.page}>
-      <Nav />
-      <main>
-        <HeroSection />
-        <ContactSection />
-      </main>
-      <Footer />
+      <div className={styles.container}>
+        <Nav />
+        <main>
+          <HeroSection />
+          <ContactSection />
+        </main>
+        <Footer />
+      </div>
     </div>
   );
 }
