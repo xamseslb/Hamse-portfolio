@@ -13,11 +13,13 @@ const PROJECTS = [
 ];
 
 function ProjectCard({ project, progress, stackRotate, fromX, fromY, toX, toY, zIdx, stackOpacity }) {
-    const x = useTransform(progress, [0, 0.35], [fromX, toX]);
-    const y = useTransform(progress, [0, 0.35], [fromY, toY]);
-    const rotate = useTransform(progress, [0, 0.35], [stackRotate, 0]);
+    // Map the movement across the ENTIRE scroll progress [0, 1] 
+    // so they never freeze in the middle, but continuously spread out.
+    const x = useTransform(progress, [0, 1], [fromX, toX * 1.5]); // Multiply spread slightly since it has more distance
+    const y = useTransform(progress, [0, 1], [fromY, toY * 1.2]);
+    const rotate = useTransform(progress, [0, 1], [stackRotate, 0]);
     const opacity = useTransform(progress, [0, 0.05], [stackOpacity, 1]);
-    const infoOpacity = useTransform(progress, [0.15, 0.35], [0, 1]);
+    const infoOpacity = useTransform(progress, [0.3, 0.7], [0, 1]);
 
     return (
         <motion.a
