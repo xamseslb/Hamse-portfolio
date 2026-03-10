@@ -4,14 +4,14 @@
 
 .scrollContainer {
     position: relative;
-    height: 280vh;
+    height: 220vh;
+    /* Enough scroll distance */
 }
 
 /* ---- Layer 1: Normal Flow Content ---- */
 .normalFlowContent {
     position: absolute;
-    /* or relative padding */
-    top: 14vh;
+    top: 15vh;
     left: 6%;
     width: 88%;
     z-index: 5;
@@ -20,7 +20,7 @@
 }
 
 .heroText {
-    max-width: 440px;
+    max-width: 500px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -105,37 +105,32 @@
     color: white;
 }
 
-.scrollHintRaw {
-    margin-top: 10vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: #6B7280;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    opacity: 0.6;
-}
-
 /* ---- Layer 2: Sticky Cards Viewport ---- */
 .stickyCardsViewport {
     position: sticky;
     top: 0;
-    height: calc(100vh - 48px);
-    /* Height of the container constraint */
+    height: 100vh;
     width: 100%;
     pointer-events: none;
     /* So it doesn't block the text underneath before scrolling */
     z-index: 10;
-    overflow: visible;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stickyInner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    max-width: 1152px;
+    /* same as layout max-w */
 }
 
 /* The divider line */
 .divider {
     position: absolute;
-    top: 22vh;
+    top: 15vh;
     left: 6%;
     right: 6%;
     height: 1px;
@@ -145,7 +140,7 @@
 /* "Latest Projects" heading */
 .gridHeading {
     position: absolute;
-    top: 10vh;
+    top: 20vh;
     left: 6%;
     pointer-events: auto;
 }
@@ -158,29 +153,36 @@
     margin-bottom: 8px;
 }
 
-/* ---- Project cards ---- */
-.cardsWrapper {
+/* ---- CSS GRID ---- */
+.perfectGrid {
     position: absolute;
-    inset: 0;
+    top: 35vh;
+    /* below the heading */
+    left: 6%;
+    right: 6%;
+    height: 55vh;
+    /* fill remaining screen reasonably */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 20px;
     pointer-events: none;
+    /* parent is none */
 }
 
 .card {
-    position: absolute;
-    top: 15vh;
-    right: 5%;
-    width: 42%;
-    aspect-ratio: 16 / 10;
+    position: relative;
+    width: 100%;
+    height: 100%;
     border-radius: 16px;
-    overflow: hidden;
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
     cursor: pointer;
     display: block;
     text-decoration: none;
     pointer-events: auto;
-    /* Re-enable clicks for the cards themselves */
+    /* Re-enable clicks */
 
-    /* Hardware Acceleration */
+    /* Hardware Acceleration to ensure 60fps translation */
     will-change: transform;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
@@ -190,6 +192,15 @@
 
 .card:hover {
     box-shadow: 0 24px 60px rgba(0, 0, 0, 0.3);
+}
+
+.cardInner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #f0f0f0;
 }
 
 .cardOverlay {
@@ -255,7 +266,7 @@
 /* ---- View More Projects ---- */
 .viewMore {
     position: absolute;
-    bottom: 5vh;
+    bottom: 2vh;
     left: 0;
     right: 0;
     text-align: center;
@@ -294,6 +305,8 @@
         width: 100%;
         text-align: center;
         align-items: center;
+        display: flex;
+        flex-direction: column;
     }
 
     .heroText {
@@ -301,8 +314,18 @@
         max-width: none;
     }
 
+    .perfectGrid {
+        position: relative;
+        top: auto;
+        left: auto;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+    }
+
     .card {
-        display: none;
+        aspect-ratio: 16/10;
+        height: auto;
     }
 
     .gridHeading {
@@ -310,6 +333,7 @@
         top: auto;
         left: auto;
         margin-top: 40px;
+        margin-bottom: 20px;
         text-align: center;
     }
 
@@ -320,7 +344,7 @@
     .viewMore {
         position: relative;
         bottom: auto;
-        margin-top: 20px;
+        margin-top: 40px;
     }
 
     .divider {

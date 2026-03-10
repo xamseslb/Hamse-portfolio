@@ -1,32 +1,31 @@
-.page {
+/* ==============================================
+   Page Container
+   ============================================== */
+
+.outerWrapper {
   position: relative;
-  z-index: 1;
+  width: 100%;
   min-height: 100vh;
-  padding: 24px 24px;
-  background: #f2f2f2;
+  overflow: hidden;
+  background: var(--bg);
 }
 
 .container {
-  max-width: 1500px;
-  /* limits width */
-  margin: 0 auto;
-  /* centers it */
-  background: #ffffff;
-  border-radius: 48px;
-  min-height: calc(100vh - 48px);
   position: relative;
-  overflow: visible;
-  /* so sticky nav works, or clip x if needed */
-  overflow-x: clip;
-  box-shadow:
-    0 0 80px rgba(100, 130, 240, 0.08),
-    0 0 30px rgba(100, 130, 240, 0.04),
-    0 0 0 1px rgba(0, 0, 0, 0.03);
+  width: 100%;
+  max-width: 1152px;
+  /* Matches Tailwind max-w-6xl */
+  margin: 0 auto;
+  min-height: 100vh;
+  background: var(--surface);
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
 }
 
 @media (max-width: 900px) {
-  .page {
-    padding: 12px;
+  .outerWrapper {
+    padding: 0;
+    /* Or adjust as needed for mobile */
   }
 
   .container {
