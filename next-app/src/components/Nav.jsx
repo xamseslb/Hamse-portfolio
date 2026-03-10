@@ -12,7 +12,8 @@ export default function Nav() {
                 </Link>
                 <div className={styles.links}>
                     <Link href="/projects" className={styles.link}>Projects</Link>
-                    <Link href="#contact" className={styles.link}>Contact</Link>
+                    <Link href="#about" className={styles.link}>About</Link>
+                    <Link href="#contact" className={styles.linkOutlined}>Contact</Link>
                 </div>
             </div>
         </nav>
