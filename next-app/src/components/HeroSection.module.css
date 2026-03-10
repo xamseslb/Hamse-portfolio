@@ -10,20 +10,16 @@
 /* ---- Layer 1: Normal Flow Content ---- */
 .normalFlowContent {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: #ffffff;
+    /* or relative padding */
+    top: 14vh;
+    left: 6%;
+    width: 88%;
     z-index: 5;
     pointer-events: none;
     /* let clicks pass down if needed */
 }
 
 .heroText {
-    position: absolute;
-    top: 14vh;
-    left: 6%;
     max-width: 440px;
     display: flex;
     flex-direction: column;
