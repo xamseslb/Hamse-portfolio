@@ -1,0 +1,178 @@
+.container {
+    position: relative;
+    height: 250vh;
+    /* tall scroll zone — Framer Motion tracks progress through here */
+}
+
+.sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 100px 60px 60px;
+    gap: 40px;
+    overflow: visible;
+}
+
+/* LEFT */
+.heroLeft {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    position: relative;
+    z-index: 10;
+}
+
+.locationBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.07);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: #0D0D1A;
+    margin-bottom: 28px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.dot {
+    width: 7px;
+    height: 7px;
+    background: #22c55e;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.heroName {
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 1.0;
+    color: #0D0D1A;
+    margin-bottom: 24px;
+}
+
+.dim {
+    color: rgba(13, 13, 26, 0.35);
+}
+
+.bio {
+    font-size: 0.97rem;
+    color: #6B7280;
+    line-height: 1.7;
+    max-width: 420px;
+    margin-bottom: 36px;
+}
+
+.githubBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #0D0D1A;
+    color: white;
+    padding: 11px 22px 11px 10px;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
+}
+
+.githubBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.3);
+}
+
+.githubAvatar {
+    width: 34px;
+    height: 34px;
+    background: linear-gradient(135deg, #4F46E5, #7C3AED);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 0.85rem;
+    color: white;
+    flex-shrink: 0;
+}
+
+/* RIGHT */
+.heroRight {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    height: 100%;
+}
+
+.cardStack {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    height: 380px;
+}
+
+/* Each hero card: absolute positioned, fills a proportional slot */
+.heroCard {
+    position: absolute;
+    width: 82%;
+    aspect-ratio: 16 / 10;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.28);
+    top: 0;
+    right: 10%;
+}
+
+/* Scroll hint */
+.scrollHint {
+    position: absolute;
+    bottom: 32px;
+    left: 60px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #6B7280;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .sticky {
+        grid-template-columns: 1fr;
+        padding: 120px 28px 60px;
+        text-align: center;
+        height: auto;
+        position: relative;
+    }
+
+    .container {
+        height: auto;
+    }
+
+    .heroRight {
+        display: none;
+    }
+
+    .heroLeft {
+        align-items: center;
+    }
+
+    .heroName {
+        font-size: 3rem;
+    }
+
+    .scrollHint {
+        display: none;
+    }
+}
