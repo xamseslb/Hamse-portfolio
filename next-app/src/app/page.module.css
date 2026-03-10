@@ -1,35 +1,6 @@
-/* ==============================================
-   Page Container
-   ============================================== */
-
-.outerWrapper {
+.page {
   position: relative;
-  width: 100%;
+  z-index: 1;
   min-height: 100vh;
-  overflow: hidden;
-  background: var(--bg);
-}
-
-.container {
-  position: relative;
-  width: 100%;
-  max-width: 1152px;
-  /* Matches Tailwind max-w-6xl */
-  margin: 0 auto;
-  min-height: 100vh;
-  background: var(--surface);
-  border-left: 1px solid var(--border);
-  border-right: 1px solid var(--border);
-}
-
-@media (max-width: 900px) {
-  .outerWrapper {
-    padding: 0;
-    /* Or adjust as needed for mobile */
-  }
-
-  .container {
-    border-radius: 32px;
-    min-height: calc(100vh - 24px);
-  }
+  overflow-x: hidden;
 }

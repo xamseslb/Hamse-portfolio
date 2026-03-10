@@ -8,13 +8,9 @@ export default function Home() {
   return (
     <div className={styles.page}>
       <Nav />
-      <div className={styles.container}>
-        <main>
-          <HeroSection />
-          <ContactSection />
-        </main>
-        <Footer />
-      </div>
+      <HeroSection />
+      <ContactSection />
+      <Footer />
     </div>
   );
 }

@@ -13,11 +13,13 @@ const PROJECTS = [
 ];
 
 function ProjectCard({ project, progress, stackRotate, fromX, fromY, toX, toY, zIdx, stackOpacity }) {
+    // Austin's layout has the animation happen over the full 0 -> 1 range 
+    // so that even the slightest scroll adjusts the cards, keeping it 1:1 responsive
     const x = useTransform(progress, [0, 1], [fromX, toX]);
     const y = useTransform(progress, [0, 1], [fromY, toY]);
     const rotate = useTransform(progress, [0, 1], [stackRotate, 0]);
-    const opacity = useTransform(progress, [0, 0.2], [stackOpacity, 1]);
-    const infoOpacity = useTransform(progress, [0.4, 0.9], [0, 1]);
+    const opacity = useTransform(progress, [0, 0.15], [stackOpacity, 1]);
+    const infoOpacity = useTransform(progress, [0.6, 0.9], [0, 1]);
 
     return (
         <motion.a
@@ -52,28 +54,26 @@ export default function HeroSection() {
         offset: ['start start', 'end end'],
     });
 
-    // A very light, single spring physics wrapper to give Austin's "free" feeling without the heavy stutter
+    // RESTORED SPRING: The scroll felt "stiff" and "hard" without it.
+    // We use a highly responsive, tight spring to give that fluid Austin feel
     const smoothProgress = useSpring(scrollYProgress, {
-        stiffness: 120,
-        damping: 24,
-        restDelta: 0.001
+        stiffness: 150,
+        damping: 22,
+        mass: 0.5,
+        restDelta: 0.0001
     });
 
-    const headingOpacity = useTransform(smoothProgress, [0.2, 0.35], [0, 1]);
-    const headingY = useTransform(smoothProgress, [0.2, 0.35], [20, 0]);
+    const headingOpacity = useTransform(smoothProgress, [0.1, 0.3], [0, 1]);
+    const headingY = useTransform(smoothProgress, [0.1, 0.3], [30, 0]);
 
-    const dividerOpacity = useTransform(smoothProgress, [0.15, 0.3], [0, 1]);
-    const scrollHintOp = useTransform(smoothProgress, [0, 0.08], [1, 0]);
-    const viewMoreOp = useTransform(smoothProgress, [0.65, 0.75], [0, 1]);
+    const dividerOpacity = useTransform(smoothProgress, [0.05, 0.2], [0, 1]);
+    const scrollHintOp = useTransform(smoothProgress, [0, 0.05], [1, 0]);
+    const viewMoreOp = useTransform(smoothProgress, [0.8, 1], [0, 1]);
 
     return (
         <section ref={containerRef} className={styles.scrollContainer}>
 
-            {/* 
-        LAYER 1: Normal document flow. 
-        This is why it felt rigid before - the hero text couldn't scroll away naturally. 
-        Now it will scroll up as the user moves down, exposing the background gracefully.
-      */}
+            {/* LAYER 1: Normal document flow. Hero text scrolls away naturally. */}
             <div className={styles.normalFlowContent}>
                 <div className={styles.heroText}>
                     <h1 className={styles.heroName}>
@@ -102,7 +102,6 @@ export default function HeroSection() {
                     </a>
                 </div>
 
-                {/* Scroll hint naturally situated in the document flow */}
                 <motion.div
                     className={styles.scrollHintRaw}
                     style={{ opacity: scrollHintOp }}
@@ -114,68 +113,61 @@ export default function HeroSection() {
                 </motion.div>
             </div>
 
-            {/* 
-        LAYER 2: The sticky cards.
-        They stay frozen on the screen while the heroText scrolls up behind them.
-      */}
+            {/* LAYER 2: The sticky cards viewport */}
             <div className={styles.stickyCardsViewport}>
 
-                {/* Divider line that appears over time */}
                 <motion.div className={styles.divider} style={{ opacity: dividerOpacity }} />
 
-                {/* "Latest Projects" heading fades in */}
                 <motion.div className={styles.gridHeading} style={{ opacity: headingOpacity, y: headingY }}>
                     <h2 className={styles.latestTitle}>Latest Projects</h2>
                 </motion.div>
 
-                {/* Project Cards */}
                 <div className={styles.cardsWrapper}>
-                    {/* Top Left */}
+                    {/* Card 0: AlphaFrame (Top Left) */}
                     <ProjectCard
                         project={PROJECTS[0]}
                         progress={smoothProgress}
-                        stackRotate={-4}
-                        fromX="0%" fromY="0%"
-                        toX="-105%" toY="0%"
+                        stackRotate={-6}
+                        fromX={0} fromY={0}
+                        toX={-550} toY={180}
                         zIdx={4}
                         stackOpacity={1}
                     />
 
-                    {/* Top Right */}
+                    {/* Card 1: AfnanBakes (Top Right) */}
                     <ProjectCard
                         project={PROJECTS[1]}
                         progress={smoothProgress}
-                        stackRotate={2}
-                        fromX="0%" fromY="0%"
-                        toX="0%" toY="0%"
+                        stackRotate={4}
+                        fromX={0} fromY={0}
+                        toX={50} toY={120}  /* Reduced spread slightly so it stays centered inside container */
                         zIdx={3}
                         stackOpacity={0.9}
                     />
 
-                    {/* Bottom Left */}
+                    {/* Card 2: Bounce Master (Bottom Left) */}
                     <ProjectCard
                         project={PROJECTS[2]}
                         progress={smoothProgress}
-                        stackRotate={6}
-                        fromX="0%" fromY="0%"
-                        toX="-105%" toY="105%"
+                        stackRotate={8}
+                        fromX={0} fromY={0}
+                        toX={-600} toY={520}
                         zIdx={2}
-                        stackOpacity={0.7}
+                        stackOpacity={0.6}
                     />
 
-                    {/* Bottom Right */}
+                    {/* Card 3: IAO/Placeholder (Bottom Right) */}
                     <ProjectCard
                         project={PROJECTS[3]}
                         progress={smoothProgress}
-                        stackRotate={-2}
-                        fromX="0%" fromY="0%"
-                        toX="0%" toY="105%"
+                        stackRotate={-5}
+                        fromX={0} fromY={0}
+                        toX={20} toY={480}
                         zIdx={1}
-                        stackOpacity={0.5}
+                        stackOpacity={0.4}
                     />
                 </div>
 
-                {/* View More Projects fading in at the end */}
                 <motion.div className={styles.viewMore} style={{ opacity: viewMoreOp }}>
                     <a href="/projects">View More Projects ↗</a>
                 </motion.div>
