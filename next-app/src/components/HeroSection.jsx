@@ -54,12 +54,9 @@ export default function HeroSection() {
         offset: ['start start', 'end end'],
     });
 
-    // A very light, single spring physics wrapper to give Austin's "free" feeling without the heavy stutter
-    const smoothProgress = useSpring(scrollYProgress, {
-        stiffness: 120,
-        damping: 24,
-        restDelta: 0.001
-    });
+    // Lenis handles all scroll smoothing at the browser level now.
+    // No need for useSpring - just use raw scroll progress directly.
+    const smoothProgress = scrollYProgress;
 
     const headingOpacity = useTransform(smoothProgress, [0.2, 0.35], [0, 1]);
     const headingY = useTransform(smoothProgress, [0.2, 0.35], [20, 0]);
