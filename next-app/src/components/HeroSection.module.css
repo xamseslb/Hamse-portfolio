@@ -1,30 +1,33 @@
-.container {
+/* ============================================
+   HeroSection — Single scroll flow
+   Container is 300vh. Sticky viewport holds
+   everything: hero text, cards, grid heading.
+   ============================================ */
+
+.scrollContainer {
     position: relative;
-    height: 250vh;
-    /* tall scroll zone — Framer Motion tracks progress through here */
+    height: 300vh;
 }
 
-.sticky {
+.stickyViewport {
     position: sticky;
     top: 0;
     height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
     max-width: 1280px;
     margin: 0 auto;
     padding: 100px 60px 60px;
-    gap: 40px;
     overflow: visible;
 }
 
-/* LEFT */
-.heroLeft {
+/* ---- Hero text (left side, fades out) ---- */
+.heroText {
+    position: absolute;
+    top: 100px;
+    left: 60px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 0;
-    position: relative;
+    max-width: 450px;
     z-index: 10;
 }
 
@@ -84,6 +87,7 @@
     font-weight: 600;
     transition: transform 0.2s, box-shadow 0.2s;
     box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
+    text-decoration: none;
 }
 
 .githubBtn:hover {
@@ -105,35 +109,172 @@
     flex-shrink: 0;
 }
 
-/* RIGHT */
-.heroRight {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    height: 100%;
-}
-
-.cardStack {
-    position: relative;
-    width: 100%;
-    max-width: 480px;
-    height: 380px;
-}
-
-/* Each hero card: absolute positioned, fills a proportional slot */
-.heroCard {
+/* ---- "Latest Projects" heading (fades in mid-scroll) ---- */
+.gridHeading {
     position: absolute;
-    width: 82%;
+    top: 60px;
+    left: 60px;
+    z-index: 5;
+}
+
+.latestTitle {
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    color: #0D0D1A;
+    margin-bottom: 8px;
+}
+
+.latestSub {
+    font-size: 0.92rem;
+    color: #6B7280;
+    line-height: 1.7;
+}
+
+/* ---- Project cards ---- */
+.card {
+    position: absolute;
+    top: 15%;
+    right: 8%;
+    width: 340px;
     aspect-ratio: 16 / 10;
     border-radius: 18px;
     overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.28);
-    top: 0;
-    right: 10%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    display: block;
+    text-decoration: none;
+    will-change: transform;
 }
 
-/* Scroll hint */
+.cardImageWrap {
+    position: absolute;
+    inset: 0;
+}
+
+.cardOverlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    pointer-events: none;
+}
+
+.cardOverlay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 35%, rgba(0, 0, 0, 0.65) 100%);
+    pointer-events: none;
+}
+
+.cardTag {
+    position: relative;
+    z-index: 3;
+    align-self: flex-start;
+    margin: 14px 14px 0;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    padding: 4px 10px;
+    border-radius: 999px;
+}
+
+.cardBottom {
+    position: relative;
+    z-index: 3;
+    padding: 14px 18px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.cardTitle {
+    font-size: 1rem;
+    font-weight: 700;
+    color: white;
+    letter-spacing: -0.02em;
+}
+
+.cardCta {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.7);
+    white-space: nowrap;
+}
+
+.card:hover .cardCta {
+    color: white;
+}
+
+.card:hover {
+    box-shadow: 0 28px 72px rgba(0, 0, 0, 0.35);
+}
+
+/* ---- Placeholder card ---- */
+.placeholder {
+    position: absolute;
+    top: 15%;
+    right: 8%;
+    width: 340px;
+    aspect-ratio: 16 / 10;
+    border-radius: 18px;
+    background: #F8F7F4;
+    border: 2px dashed rgba(0, 0, 0, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    will-change: transform;
+}
+
+.placeholderInner {
+    text-align: center;
+}
+
+.placeholderIcon {
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+    opacity: 0.3;
+}
+
+.placeholderLabel {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #6B7280;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+/* ---- View More Projects ---- */
+.viewMore {
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 5;
+}
+
+.viewMore a {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #0D0D1A;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.viewMore a:hover {
+    color: #4F46E5;
+}
+
+/* ---- Scroll hint ---- */
 .scrollHint {
     position: absolute;
     bottom: 32px;
@@ -144,28 +285,40 @@
     font-size: 0.75rem;
     font-weight: 500;
     color: #6B7280;
+    z-index: 5;
 }
 
-/* Responsive */
+/* ---- Responsive ---- */
 @media (max-width: 900px) {
-    .sticky {
-        grid-template-columns: 1fr;
+    .scrollContainer {
+        height: auto;
+    }
+
+    .stickyViewport {
+        position: relative;
         padding: 120px 28px 60px;
         text-align: center;
-        height: auto;
+    }
+
+    .heroText {
         position: relative;
+        top: auto;
+        left: auto;
+        align-items: center;
+        max-width: none;
     }
 
-    .container {
-        height: auto;
-    }
-
-    .heroRight {
+    .card,
+    .placeholder {
         display: none;
     }
 
-    .heroLeft {
-        align-items: center;
+    .gridHeading {
+        position: relative;
+        top: auto;
+        left: auto;
+        margin-top: 40px;
+        text-align: center;
     }
 
     .heroName {
@@ -174,5 +327,11 @@
 
     .scrollHint {
         display: none;
+    }
+
+    .viewMore {
+        position: relative;
+        bottom: auto;
+        margin-top: 30px;
     }
 }

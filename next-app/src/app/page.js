@@ -1,8 +1,7 @@
 import Nav from '@/components/Nav';
 import HeroSection from '@/components/HeroSection';
-import ProjectsGrid from '@/components/ProjectsGrid';
-import Footer from '@/components/Footer';
 import ContactSection from '@/components/ContactSection';
+import Footer from '@/components/Footer';
 import styles from './page.module.css';
 
 export default function Home() {
@@ -11,7 +10,6 @@ export default function Home() {
       <Nav />
       <main>
         <HeroSection />
-        <ProjectsGrid />
         <ContactSection />
       </main>
       <Footer />
