@@ -1,25 +1,43 @@
 'use client';
-import Link from 'next/link';
+
+import { useEffect, useRef, useState } from 'react';
+import { Link } from 'next-view-transitions';
 import styles from './Nav.module.css';
 
 export default function Nav() {
-    return (
-        <nav className={styles.nav}>
-            <div className={styles.pill}>
-                <Link href="/" className={styles.logo}>
-                    <span className={styles.icon}>
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-                        </svg>
-                    </span>
-                    Hamse
-                </Link>
-                <div className={styles.links}>
-                    <Link href="/projects" className={styles.link}>Projects</Link>
-                    <Link href="#about" className={styles.link}>About</Link>
-                    <Link href="#contact" className={styles.linkOutlined}>Contact</Link>
-                </div>
-            </div>
-        </nav>
-    );
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  return (
+    <nav className={`${styles.nav} ${scrolled ? styles.compact : ''}`}>
+      <div className={styles.inner}>
+        {/* Logo */}
+        <Link href="/" className={styles.logo} style={{ textDecoration: 'none', color: 'inherit' }}>
+          <svg className={styles.bolt} width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+          </svg>
+          <span className={styles.logoText}>Hamse</span>
+        </Link>
+
+        {/* Links - visible when full, hidden when compact */}
+        <div className={styles.links}>
+          <Link href="/projects" className={styles.link}>Projects</Link>
+          <Link href="/#about" className={styles.link}>About</Link>
+          <Link href="/#contact" className={styles.contactBtn}>Contact</Link>
+        </div>
+
+        {/* Three dots menu - visible when compact */}
+        <button className={styles.dots} aria-label="Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </nav>
+  );
 }

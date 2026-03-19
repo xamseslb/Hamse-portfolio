@@ -1,0 +1,220 @@
+/* ================================================
+   About Section — Matches Austin's exact layout
+   with scroll reveal animations
+   ================================================ */
+
+.section {
+  padding: 0 48px 80px;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  margin-bottom: 80px;
+}
+
+/* Header: "About" label + name */
+.header {
+  margin-bottom: 48px;
+}
+
+.label {
+  display: block;
+  font-size: 2.8rem;
+  font-weight: 400;
+  color: #8b9bb4;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin-bottom: 4px;
+  /* Reveal */
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.name {
+  font-size: 3rem;
+  font-weight: 600;
+  color: #1a1a2e;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  /* Reveal */
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s;
+}
+
+/* Two-column layout */
+.content {
+  display: flex;
+  gap: 60px;
+  align-items: flex-start;
+}
+
+/* Left column: photo + social */
+.photoColumn {
+  flex: 0 0 220px;
+  /* Reveal */
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease 0.15s, transform 0.8s ease 0.15s;
+}
+
+.photoWrapper {
+  width: 220px;
+  height: 270px;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 16px;
+  background: #d1d5db;
+}
+
+.photoPlaceholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  font-weight: 700;
+  color: #6b7280;
+  background: linear-gradient(135deg, #e5e7eb, #d1d5db);
+}
+
+.socialIcons {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.socialIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #1a1a2e;
+  color: #ffffff;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.socialIcon:hover {
+  background: #333;
+  transform: translateY(-2px);
+}
+
+.photoName {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin-bottom: 2px;
+}
+
+.photoTitle {
+  font-size: 0.82rem;
+  color: #6b7280;
+  letter-spacing: 0.01em;
+}
+
+/* Right column: bio */
+.bioColumn {
+  flex: 1;
+  padding-top: 8px;
+}
+
+.bioParagraph {
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 28px;
+  color: #1a1a2e;
+  /* Reveal */
+  opacity: 0;
+  transform: translateY(25px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.bioParagraph strong {
+  font-weight: 700;
+  color: #1a1a2e;
+}
+
+.bioMuted {
+  color: #6b7280;
+}
+
+/* Signature */
+.signature {
+  margin-top: 16px;
+  font-family: 'Georgia', serif;
+  font-size: 1.8rem;
+  color: #1a1a2e;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.signature em {
+  font-style: italic;
+}
+
+/* ==============================
+   VISIBLE STATE — triggered by JS
+   ============================== */
+.visible .label {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.visible .name {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.visible .photoColumn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.visible .bioParagraph {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.visible .signature {
+  opacity: 0.7;
+  transform: translateY(0);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .section {
+    padding: 0 24px 60px;
+  }
+
+  .content {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .photoColumn {
+    flex: none;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .photoWrapper {
+    width: 180px;
+    height: 220px;
+  }
+
+  .label {
+    font-size: 2.2rem;
+  }
+
+  .name {
+    font-size: 2.4rem;
+  }
+}

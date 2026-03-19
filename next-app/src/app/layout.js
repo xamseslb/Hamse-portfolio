@@ -1,5 +1,5 @@
+import { ViewTransitions } from 'next-view-transitions';
 import './globals.css';
-import SmoothScroll from '@/components/SmoothScroll';
 
 export const metadata = {
   title: 'Hamse – Full Stack Developer',
@@ -8,10 +8,10 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="no">
-      <body>
-        <SmoothScroll>{children}</SmoothScroll>
-      </body>
-    </html>
+    <ViewTransitions>
+      <html lang="no">
+        <body>{children}</body>
+      </html>
+    </ViewTransitions>
   );
 }

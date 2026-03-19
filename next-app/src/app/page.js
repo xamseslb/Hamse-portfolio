@@ -1,19 +1,21 @@
+import styles from './page.module.css';
 import Nav from '@/components/Nav';
 import HeroSection from '@/components/HeroSection';
+import LatestProjects from '@/components/LatestProjects';
+import AboutSection from '@/components/AboutSection';
+import ToolkitSection from '@/components/ToolkitSection';
 import ContactSection from '@/components/ContactSection';
-import Footer from '@/components/Footer';
-import styles from './page.module.css';
 
 export default function Home() {
   return (
     <div className={styles.page}>
-      <Nav />
       <div className={styles.container}>
-        <main>
-          <HeroSection />
-          <ContactSection />
-        </main>
-        <Footer />
+        <Nav />
+        <HeroSection />
+        <LatestProjects />
+        <AboutSection />
+        <ToolkitSection />
+        <ContactSection />
       </div>
     </div>
   );

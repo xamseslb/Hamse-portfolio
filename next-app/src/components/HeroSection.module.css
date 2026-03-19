@@ -1,329 +1,176 @@
-/* ============================================
-   HeroSection — Parallax Scrolling Layout
-   ============================================ */
+/* ================================================
+   HeroSection — Matching Austin's hero text layout
+   ================================================ */
 
-.scrollContainer {
-    position: relative;
-    height: 280vh;
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap');
+
+.hero {
+  position: relative;
+  padding: 80px 48px 60px;
+  min-height: 500px;
+  overflow: visible;
 }
 
-/* ---- Layer 1: Normal Flow Content ---- */
-.normalFlowContent {
-    position: absolute;
-    /* or relative padding */
-    top: 14vh;
-    left: 6%;
-    width: 88%;
-    z-index: 5;
-    pointer-events: none;
-    /* let clicks pass down if needed */
+.textContent {
+  position: relative;
+  z-index: 2;
+  max-width: 45%;
 }
 
-.heroText {
-    max-width: 440px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    pointer-events: auto;
-    /* re-enable clicks for links */
-}
-
-.heroName {
-    font-size: clamp(3.5rem, 6vw, 5.2rem);
-    font-weight: 800;
-    letter-spacing: -0.04em;
-    line-height: 1.05;
-    color: #0D0D1A;
-    margin-bottom: 24px;
-}
-
-.dim {
-    color: rgba(13, 13, 26, 0.3);
-}
-
+/* ---- Location badge ---- */
 .locationBadge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: white;
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    border-radius: 999px;
-    padding: 6px 14px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: #0D0D1A;
-    margin-bottom: 20px;
-    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.04);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 999px;
+  padding: 6px 16px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 28px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
 }
 
-.dot {
-    width: 7px;
-    height: 7px;
-    background: #22c55e;
-    border-radius: 50%;
+.greenDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
 }
 
-.bio {
-    font-size: 0.95rem;
-    color: #4B5563;
-    line-height: 1.6;
-    max-width: 380px;
-    margin-top: 24px;
-    margin-bottom: 24px;
+/* ---- Heading ---- */
+.heading {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(3rem, 6vw, 4.5rem);
+  font-weight: 400;
+  color: #1d2939;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
 }
 
+/* ---- Description ---- */
+.description {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #4b5563;
+  max-width: 380px;
+  margin-bottom: 32px;
+}
+
+.description strong {
+  color: #1a1a2e;
+  font-weight: 700;
+}
+
+/* ---- GitHub button ---- */
 .githubBtn {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: #0D0D1A;
-    color: white;
-    padding: 8px 18px 8px 6px;
-    border-radius: 999px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    transition: transform 0.2s, box-shadow 0.2s;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-    text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #1a5c5c, #3a3a6b, #7a3a5c, #8b3a5c);
+  border-radius: 999px;
+  padding: 6px 24px 6px 6px;
+  color: #ffffff;
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-decoration: none;
+  box-shadow: 0 8px 28px rgba(122, 58, 92, 0.35), inset 0 0 0 1px rgba(255, 255, 255, 0.15);
 }
 
 .githubBtn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+  transform: scale(1.03);
+  box-shadow: 0 12px 36px rgba(122, 58, 92, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.25);
+}
+
+.githubAvatarWrap {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  flex-shrink: 0;
 }
 
 .githubAvatar {
-    width: 30px;
-    height: 30px;
-    background: linear-gradient(135deg, #111827, #374151);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 900;
-    font-size: 0.75rem;
-    color: white;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.scrollHintRaw {
-    margin-top: 10vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: #6B7280;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    opacity: 0.6;
+.githubAvatarPlaceholder {
+  width: 100%;
+  height: 100%;
+  background: #374151;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 700;
 }
 
-/* ---- Layer 2: Sticky Cards Viewport ---- */
-.stickyCardsViewport {
-    position: sticky;
-    top: 0;
-    height: calc(100vh - 48px);
-    /* Height of the container constraint */
-    width: 100%;
-    pointer-events: none;
-    /* So it doesn't block the text underneath before scrolling */
-    z-index: 10;
-    overflow: visible;
+/* GitHub icon (hidden by default, appears on hover) */
+.githubIconWrap {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  max-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-width 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.25s ease;
 }
 
-/* The divider line */
-.divider {
-    position: absolute;
-    top: 22vh;
-    left: 6%;
-    right: 6%;
-    height: 1px;
-    background: rgba(0, 0, 0, 0.06);
+.githubIconVisible {
+  max-width: 60px;
+  opacity: 1;
 }
 
-/* "Latest Projects" heading */
-.gridHeading {
-    position: absolute;
-    top: 10vh;
-    left: 6%;
-    pointer-events: auto;
+.plus {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 300;
 }
 
-.latestTitle {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 800;
-    letter-spacing: -0.04em;
-    color: #0D0D1A;
-    margin-bottom: 8px;
+.githubIcon {
+  width: 28px;
+  height: 28px;
+  color: #ffffff;
 }
 
-/* ---- Project cards ---- */
-.cardsWrapper {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
+.githubText {
+  white-space: nowrap;
 }
 
-.card {
-    position: absolute;
-    top: 15vh;
-    right: 5%;
-    width: 42%;
-    aspect-ratio: 16 / 10;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
-    cursor: pointer;
-    display: block;
-    text-decoration: none;
-    pointer-events: auto;
-    /* Re-enable clicks for the cards themselves */
-
-    /* Hardware Acceleration */
-    will-change: transform;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    transform: translateZ(0);
-    transition: box-shadow 0.3s;
-}
-
-.card:hover {
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.3);
-}
-
-.cardOverlay {
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    pointer-events: none;
-}
-
-.cardOverlay::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom, transparent 40%, rgba(0, 0, 0, 0.6) 100%);
-}
-
-.cardTag {
-    position: relative;
-    z-index: 3;
-    align-self: flex-start;
-    margin: 16px 16px 0;
-    background: rgba(0, 0, 0, 0.6);
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
-    color: white;
-    font-size: 0.65rem;
-    font-weight: 600;
-    letter-spacing: 0.03em;
-    padding: 6px 14px;
-    border-radius: 999px;
-}
-
-.cardBottom {
-    position: relative;
-    z-index: 3;
-    padding: 20px 24px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-}
-
-.cardTitle {
-    font-size: 1.15rem;
-    font-weight: 700;
-    color: white;
-    letter-spacing: -0.01em;
-}
-
-.cardCta {
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.7);
-    white-space: nowrap;
-}
-
-.card:hover .cardCta {
-    color: white;
-}
-
-/* ---- View More Projects ---- */
-.viewMore {
-    position: absolute;
-    bottom: 5vh;
-    left: 0;
-    right: 0;
-    text-align: center;
-    pointer-events: auto;
-}
-
-.viewMore a {
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: #0D0D1A;
-    text-decoration: none;
-}
-
-.viewMore a:hover {
-    color: #4F46E5;
+/* Anchor for the GSAP scroll animation stack */
+.stackAnchor {
+  position: absolute;
+  top: 40px;
+  right: -20px;
+  width: 55%;
+  height: calc(100% - 40px);
+  pointer-events: none;
+  /* Centered sub-anchor inside so we map to the center of the stack */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* ---- Responsive ---- */
-@media (max-width: 900px) {
-    .scrollContainer {
-        height: auto;
-    }
-
-    .stickyCardsViewport {
-        position: relative;
-        height: auto;
-        padding: 120px 24px 60px;
-        text-align: center;
-    }
-
-    .normalFlowContent {
-        position: relative;
-        top: auto;
-        left: auto;
-        padding-top: 100px;
-        width: 100%;
-        text-align: center;
-        align-items: center;
-    }
-
-    .heroText {
-        align-items: center;
-        max-width: none;
-    }
-
-    .card {
-        display: none;
-    }
-
-    .gridHeading {
-        position: relative;
-        top: auto;
-        left: auto;
-        margin-top: 40px;
-        text-align: center;
-    }
-
-    .heroName {
-        font-size: 2.5rem;
-    }
-
-    .viewMore {
-        position: relative;
-        bottom: auto;
-        margin-top: 20px;
-    }
-
-    .divider {
-        display: none;
-    }
+@media (max-width: 600px) {
+  .hero {
+    padding: 60px 24px 40px;
+  }
+  .heading {
+    font-size: 2.5rem;
+  }
+  .textContent {
+    max-width: 100%;
+  }
 }

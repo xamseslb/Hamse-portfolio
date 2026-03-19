@@ -1,0 +1,287 @@
+.main {
+  padding: 40px 48px 120px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.backButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #6b7280;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin-bottom: 60px;
+  transition: color 0.2s ease;
+}
+
+.backButton:hover {
+  color: #111827;
+}
+
+/* INTRO SECTION - AUSTIN METRICS */
+.introSection {
+  margin-top: 0;
+  margin-bottom: 80px;
+  text-align: left;
+}
+
+.heading {
+  font-family: inherit;
+  font-size: 3rem; /* Scaled down perfectly to match Austin */
+  font-weight: 500;
+  color: #111827;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 24px;
+  max-width: 650px; /* Forces narrower clean box */
+}
+
+.metaRow {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.metaItem {
+  display: flex;
+  gap: 8px;
+  font-size: 0.85rem; /* Smaller sub-tags like Austin */
+}
+
+.metaLabel {
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.metaValue {
+  color: #111827;
+  font-weight: 600;
+}
+
+.description {
+  font-size: 1.05rem; /* Readability identical to Austin paragraph */
+  line-height: 1.6;
+  color: #374151;
+  max-width: 650px; /* Restrict width for high end typography */
+  margin-bottom: 48px;
+}
+
+.description strong {
+  font-weight: 500;
+  color: #111827;
+}
+
+.scopeGroup {
+  margin-bottom: 48px;
+}
+
+.scopeLabel {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 12px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tag {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #4b5563;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+}
+
+.liveSiteLink {
+  display: inline-flex;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #111827;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: opacity 0.2s ease;
+}
+
+.liveSiteLink:hover {
+  opacity: 0.7;
+}
+
+/* HORIZONTAL GALLERY SCROLL - RESTORED */
+.gallerySection {
+  margin: 60px 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.galleryScroll {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding: 20px 0;
+  scrollbar-width: none;
+  scroll-snap-type: x mandatory;
+  width: 100%;
+}
+
+.galleryScroll::-webkit-scrollbar {
+  display: none;
+}
+
+.galleryItem {
+  flex: 0 0 80%;
+  max-width: 650px;
+  scroll-snap-align: center;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  background: #161b22;
+}
+
+.galleryItem img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.navButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: white;
+  border: 1px solid rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #111827;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.navButton:hover {
+  background: #f8fafc;
+  transform: translateY(-50%) scale(1.05);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
+
+.prevButton {
+  left: -20px;
+}
+
+.nextButton {
+  right: -20px;
+}
+
+/* SECURITY AUDIT SECTION */
+.securityAudit {
+  background: #f8fafc;
+  border-radius: 24px;
+  padding: 40px;
+  margin-top: 80px;
+  border: 1px solid #f1f5f9;
+}
+
+.auditHeader {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.auditIcon {
+  width: 48px;
+  height: 48px;
+  background: white;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0f172a;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.auditTitle {
+  font-size: 1.8rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: #0f172a;
+}
+
+.auditGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.auditCard {
+  background: white;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+  border: 1px solid rgba(0,0,0,0.03);
+}
+
+.auditCard h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 12px;
+}
+
+.auditCard p {
+  font-size: 0.95rem;
+  color: #64748b;
+  line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+  .auditGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .main {
+    padding: 20px 24px 80px;
+  }
+  .heading {
+    font-size: 2.2rem;
+  }
+  .metaRow {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .gallerySection {
+    margin: 60px 0;
+  }
+  .galleryItem {
+    flex: 0 0 90%;
+  }
+  .securityAudit {
+    padding: 32px 24px;
+  }
+  .auditGrid {
+    grid-template-columns: 1fr;
+  }
+  .prevButton {
+    left: 4px;
+  }
+  .nextButton {
+    right: 4px;
+  }
+}
