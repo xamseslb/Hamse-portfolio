@@ -11,6 +11,16 @@ gsap.registerPlugin(ScrollTrigger);
 const PROJECTS = [
   { 
     id: 1, 
+    title: 'AfnanBakes', 
+    category: 'Online Bakery System',
+    link: 'View Case Study',
+    image: '/images/afnanbakes/slide_1.jpeg',
+    bgColor: '#fde0e2',
+    gridId: 'afnanbakes',
+    containImage: true
+  },
+  { 
+    id: 2, 
     title: 'Shush', 
     category: 'E2EE Private Messenger',
     link: 'View Case Study',
@@ -20,29 +30,15 @@ const PROJECTS = [
     containImage: true
   },
   { 
-    id: 2, 
-    title: 'Bespoke', 
-    category: 'Automotive Styling',
-    link: 'View Case Study',
-    image: '/images/bespoke.png',
-    bgColor: '#111827'
-  },
-  { 
     id: 3, 
-    title: 'Automedics', 
-    category: 'Automotive Repair',
+    title: 'AlphaFrame', 
+    category: 'Automated Financial AI',
     link: 'View Case Study',
-    image: '/images/automedics.png',
-    bgColor: '#000000'
-  },
-  { 
-    id: 4, 
-    title: 'IAO', 
-    category: 'Private Security',
-    link: 'View Case Study',
-    image: '/images/iao.png',
-    bgColor: '#0b162c'
-  },
+    image: '/images/alphaframe/slide_1.jpeg',
+    bgColor: '#1e2128',
+    gridId: 'alphaframe',
+    containImage: true
+  }
 ];
 
 const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;

@@ -5,6 +5,15 @@ import Nav from '@/components/Nav';
 
 const ALL_PROJECTS = [
   { 
+    id: 'afnanbakes', 
+    title: 'AfnanBakes', 
+    category: 'Online Bakery System',
+    link: 'View Case Study',
+    image: '/images/afnanbakes/slide_1.jpeg',
+    bgColor: '#fde0e2',
+    containImage: true
+  },
+  { 
     id: 'shush', 
     title: 'Shush', 
     category: 'E2EE Private Messenger',
@@ -14,60 +23,13 @@ const ALL_PROJECTS = [
     containImage: true
   },
   { 
-    id: 'react-zero-ui', 
-    title: 'React-Zero-UI', 
-    category: 'Zero Re-Render State Library',
-    link: 'View on GitHub',
-    image: '/images/react-zero-ui.png',
-    bgColor: '#16113b'
-  },
-  { 
-    id: 2, 
-    title: 'Bespoke', 
-    category: 'Automotive Styling Website',
-    link: 'See Case Study',
-    image: '/images/bespoke.png',
-    bgColor: '#111827'
-  },
-  { 
-    id: 3, 
-    title: 'Vets', 
-    category: 'Pet Insurance Website',
-    link: 'View Website',
-    image: '', // Placeholder for Vets
-    bgColor: '#d4a373'
-  },
-  { 
-    id: 4, 
-    title: 'Zero-Icon-Sprite', 
-    category: 'SVG Build Tool',
-    link: 'View on GitHub',
-    image: '', // Placeholder
-    bgColor: '#000000'
-  },
-  { 
-    id: 5, 
-    title: 'Automedics', 
-    category: 'Automotive Repair Website',
-    link: 'See Case Study',
-    image: '/images/automedics.png',
-    bgColor: '#0f172a'
-  },
-  { 
-    id: 6, 
-    title: 'IAO', 
-    category: 'Private Security Website',
-    link: 'See Case Study',
-    image: '/images/iao.png',
-    bgColor: '#0b162c'
-  },
-  { 
-    id: 7, 
-    title: 'Entitled', 
-    category: 'Event Management Web App',
-    link: 'View Website',
-    image: '', // Placeholder
-    bgColor: '#606c38'
+    id: 'alphaframe', 
+    title: 'AlphaFrame', 
+    category: 'Automated Financial AI',
+    link: 'View Case Study',
+    image: '/images/alphaframe/slide_1.jpeg',
+    bgColor: '#1e2128',
+    containImage: true
   },
 ];
 

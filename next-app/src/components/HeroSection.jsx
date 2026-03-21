@@ -32,7 +32,7 @@ export default function HeroSection() {
 
         {/* GitHub button */}
         <a
-          href="https://github.com/Hamse"
+          href="https://github.com/xamseslb"
           target="_blank"
           rel="noopener noreferrer"
           className={styles.githubBtn}
