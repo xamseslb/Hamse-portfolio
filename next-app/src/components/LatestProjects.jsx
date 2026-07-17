@@ -29,14 +29,24 @@ const PROJECTS = [
     gridId: 'shush',
     containImage: true
   },
-  { 
-    id: 3, 
-    title: 'AlphaFrame', 
+  {
+    id: 3,
+    title: 'AlphaFrame',
     category: 'Automated Financial AI',
     link: 'View Case Study',
     image: '/images/alphaframe/slide_1.jpeg',
     bgColor: '#1e2128',
     gridId: 'alphaframe',
+    containImage: true
+  },
+  {
+    id: 4,
+    title: 'Guuleed',
+    category: 'Offline-First Inventory System',
+    link: 'View Case Study',
+    image: '/images/guleed/slide_1.jpeg',
+    bgColor: '#2c3440',
+    gridId: 'guleed',
     containImage: true
   }
 ];

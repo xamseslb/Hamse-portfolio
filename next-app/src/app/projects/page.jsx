@@ -22,13 +22,22 @@ const ALL_PROJECTS = [
     bgColor: '#080808',
     containImage: true
   },
-  { 
-    id: 'alphaframe', 
-    title: 'AlphaFrame', 
+  {
+    id: 'alphaframe',
+    title: 'AlphaFrame',
     category: 'Automated Financial AI',
     link: 'View Case Study',
     image: '/images/alphaframe/slide_1.jpeg',
     bgColor: '#1e2128',
+    containImage: true
+  },
+  {
+    id: 'guleed',
+    title: 'Guuleed',
+    category: 'Offline-First Inventory System',
+    link: 'View Case Study',
+    image: '/images/guleed/slide_1.jpeg',
+    bgColor: '#2c3440',
     containImage: true
   },
 ];
