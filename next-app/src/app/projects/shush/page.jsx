@@ -63,7 +63,7 @@ export default function ShushCaseStudy() {
               </div>
             </div>
 
-            <Link href="https://github.com/xamseslb" target="_blank" rel="noopener noreferrer" className={styles.liveSiteLink}>View GitHub Profile ↗</Link>
+            <Link href="https://github.com/ZAKIN02" target="_blank" rel="noopener noreferrer" className={styles.liveSiteLink}>View Collaborator's GitHub ↗</Link>
           </section>
 
           {/* Gallery Carousel Restored */}
